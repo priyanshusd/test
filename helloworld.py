@@ -1,9 +1,10 @@
+import os
 import psycopg2
 connection = psycopg2.connect(
-        host="devtoppers.cagadciwq7si.us-east-1.rds.amazonaws.com",
-        database="pythonapp",
-        user="python",
-        password="python123")
+        host=os.environ['DB_URL'],
+        database=os.environ['DB_NAME'],
+        user=os.environ['DB_USERNAME'],
+        password=os.environ['DB_PASSNAME'])
 
 cursor = connection.cursor()
 create_table_query = '''CREATE TABLE mobile
@@ -23,4 +24,3 @@ print("1 Record inserted successfully")
 cursor.execute("SELECT * from mobile")
 record = cursor.fetchall()
 print("Result ", record)
-
